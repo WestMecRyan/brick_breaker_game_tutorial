@@ -3,11 +3,28 @@
 // declare the canvas and the context
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
+//add an array with the color constants we want
+const colorArr = ["#ee0000", "#00ee00", "#0000ee", "#0055dd"];
 // simulate a 16:9 ratio for the canvas
 canvas.width = 500;
 canvas.height = 280;
 
+// declare the variables for our html elements
+const pauseButton = document.getElementById("pause-button");
+let isPaused = false;
+
+pauseButton.addEventListener("click", function () {
+  isPaused = !isPaused;
+
+  if (!isPaused) {
+    pauseButton.innerHTML = "Pause";
+    console.log("game is playing");
+    animate();
+  } else {
+    pauseButton.innerHTML = "Play";
+    console.log("game is paused");
+  }
+});
 // declare the ball object
 const ball = {
   x: 50,
@@ -21,8 +38,17 @@ const ball = {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-  // choose the ball fill color
-  ctx.fillStyle = "#dd0022";
+
+  // make a switch case for changing the color of the ball
+  switch (true) {
+    // case ball is going up and right
+    // case ball is going down and right
+    // case ball is going left and up
+    // case ball is going left and down
+    // add a default fill color of black
+    default:
+      ctx.fillStyle = "#00000";
+  }
   // fill in the color
   ctx.fill();
 }
@@ -48,7 +74,10 @@ function animate() {
   drawBall();
   updateBall();
   // a callback for the animation function
-  requestAnimationFrame(animate);
+  // if the game is playing call back the animate function
+  if (!isPaused) {
+    requestAnimationFrame(animate);
+  }
 }
 
 // the initial animation call
