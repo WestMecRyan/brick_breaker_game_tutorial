@@ -1,4 +1,3 @@
-# Ball Game - Step 3 branch
+# Ball Game - Step 2 branch
 
-> In this step we will add a color array to change the color of ball when it hits the walls.
-> We will use a switch case statement
+> in this branch we will add the ball to the canvas and make it bounce off of the walls.
