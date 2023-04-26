@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> </title>
-    <script src="game.js"></script>
+    <title>Brick Breaker</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+    <!-- connect to the game js file and defer until the html items are placed -->
+    <script src="game.js" defer></script>
   </head>
   <body>
-    <span>Canvas goes here</span><br />
+    <canvas id="canvas"></canvas>
     <span>pause button goes here</span><br />
     <span>Speed Slider goes here</span><br />
   </body>
