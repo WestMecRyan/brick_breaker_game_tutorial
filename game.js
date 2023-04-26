@@ -48,9 +48,21 @@ function drawBall() {
   // make a switch case for changing the color of the ball
   switch (true) {
     // case ball is going up and right
+    case ball.dx >= 0 && ball.dy >= 0:
+      ctx.fillStyle = colorArr[0];
+      break;
     // case ball is going down and right
+    case ball.dx >= 0 && ball.dy < 0:
+      ctx.fillStyle = colorArr[1];
+      break;
     // case ball is going left and up
+    case ball.dx < 0 && ball.dy >= 0:
+      ctx.fillStyle = colorArr[2];
+      break;
     // case ball is going left and down
+    case ball.dx < 0 && ball.dy < 0:
+      ctx.fillStyle = colorArr[3];
+      break;
     // add a default fill color of black
     default:
       ctx.fillStyle = "#00000";
