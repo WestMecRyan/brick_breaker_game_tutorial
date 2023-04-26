@@ -12,7 +12,7 @@ canvas.height = 280;
 // declare the variables for our html elements
 const pauseButton = document.getElementById("pause-button");
 let isPaused = false;
-
+let bounces = 0;
 const speedSlider = document.getElementById("speed-slider");
 speedSlider.addEventListener("input", function () {
   ball.speed = parseInt(speedSlider.value);
@@ -40,7 +40,15 @@ const ball = {
   speed: 5,
   size: 20,
 };
-
+// declare the paddle object
+const paddle = {
+  width: 80,
+  x: canvas.width / 2 - 40,
+  y: canvas.height - 20,
+  height: 10,
+  speed: 7,
+};
+// write a function to draw the ball
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
@@ -70,7 +78,14 @@ function drawBall() {
   // fill in the color
   ctx.fill();
 }
-
+// write a function to draw the paddle
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+  ctx.fillStyle = "blue";
+  ctx.fill();
+  ctx.closePath();
+}
 // update the ball's direction based on touching the walls calculated by x and y position with account to ball diameter (size)
 function updateBall() {
   if (ball.x + ball.size)
@@ -85,12 +100,66 @@ function updateBall() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 }
+// logic for the paddle move
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+let rightPressed = false;
+let leftPressed = false;
+
+function keyDownHandler(e) {
+  if (e.key === "Right" || e.key === "ArrowRight") {
+    rightPressed = true;
+  } else if (e.key === "Left" || e.key === "ArrowLeft") {
+    leftPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.key === "Right" || e.key === "ArrowRight") {
+    rightPressed = false;
+  } else if (e.key === "Left" || e.key === "ArrowLeft") {
+    leftPressed = false;
+  }
+}
+
+function movePaddle() {
+  if (rightPressed && paddle.x < canvas.width - paddle.width) {
+    paddle.x += paddle.speed;
+  } else if (leftPressed && paddle.x > 0) {
+    paddle.x -= paddle.speed;
+  }
+}
+
+function detectCollision() {
+  if (
+    ball.y + ball.size >= paddle.y &&
+    ball.x >= paddle.x &&
+    ball.x <= paddle.x + paddle.width
+  ) {
+    ball.dy = -ball.dy; // Reverse the dy direction
+    // bounces += 1;
+  }
+}
+function updatePosition() {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+}
 
 // the animation function continually clears the screen and redraws everything based on new values
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //draw the ball
   drawBall();
+  // draw the paddle
+  drawPaddle();
+  // detect collision
+  detectCollision();
+  updatePosition();
+  // update the balls attributes i.e. position, color, size
   updateBall();
+  // update the movement for the paddle
+  movePaddle();
   // a callback for the animation function
   // if the game is playing call back the animate function
   if (!isPaused) {

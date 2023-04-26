@@ -1,8 +1,5 @@
-# Ball Game - Step 3 branch
+# Ball Game - Step 4 branch
 
-> In this step we will add a color array to change the color of ball when it hits the walls.
-> We will use a switch case statement
+> In this step we will add a paddle that moves along the bottom of the screen when we press the arrow keys, move the mouse or touch the screen.
 
-> In this branch we will add the speed slider and pause button but not any interactivity. We will also make the color of the ball change when it hits the walls.
-> We will also make the game pause when we click the pause button
-> We will also take a value from the input slider to change the speed of the ball.
+> We will add collision detection so the ball bounces away when the paddle hits it.
