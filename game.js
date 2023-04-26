@@ -13,6 +13,12 @@ canvas.height = 280;
 const pauseButton = document.getElementById("pause-button");
 let isPaused = false;
 
+const speedSlider = document.getElementById("speed-slider");
+speedSlider.addEventListener("input", function () {
+  ball.speed = parseInt(speedSlider.value);
+  ball.dx = ball.speed;
+  ball.dy = ball.speed;
+});
 pauseButton.addEventListener("click", function () {
   isPaused = !isPaused;
 

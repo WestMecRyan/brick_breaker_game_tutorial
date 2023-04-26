@@ -5,3 +5,4 @@
 
 > In this branch we will add the speed slider and pause button but not any interactivity. We will also make the color of the ball change when it hits the walls.
 > We will also make the game pause when we click the pause button
+> We will also take a value from the input slider to change the speed of the ball.
