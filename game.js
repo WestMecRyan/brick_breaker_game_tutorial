@@ -6,6 +6,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 //add an array with the color constants we want
 const colorArr = ["#ee0000", "#00ee00", "#0000ee", "#0055dd"];
+
 // simulate a 16:9 ratio for the canvas
 canvas.width = 500;
 canvas.height = 280;
