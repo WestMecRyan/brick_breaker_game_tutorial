@@ -1,5 +1,6 @@
 "use strict";
-
+// declare the vars readout
+const readout = document.getElementById("var-readout");
 // declare the canvas and the context
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -162,6 +163,18 @@ function animate() {
   movePaddle();
   // a callback for the animation function
   // if the game is playing call back the animate function
+  readout.innerHTML =
+    // console.debug(
+    `Var readout: <br/>
+  ball.x is ${ball.x} <br/>
+  ball.dx is ${ball.dx} <br/>
+  ball.y is ${ball.y} <br/>
+  ball.dy is ${ball.dy} <br/>
+  paddle.x is ${paddle.x} <br/>
+  paddle.y is ${paddle.y} <br/>
+  paddle.speed is ${paddle.speed} <br/>
+  `;
+  // );
   if (!isPaused) {
     requestAnimationFrame(animate);
   }
