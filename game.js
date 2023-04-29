@@ -167,11 +167,22 @@ function animate() {
   movePaddle();
   // a callback for the animation function
   // if the game is playing call back the animate function
-  readout.innerHTML =
-    // console.debug(
-    `Game Variables: <br/>
+  readout.innerHTML = `Game Variables: <br/>
+  ${
+    /*
+  ball.x is ${ball.x} <br/>
+  ball.dx is ${ball.dx} <br/>
+  ball.y is ${ball.y} <br/>
+  ball.dy is ${ball.dy} <br/>
+  paddle.x is ${paddle.x} <br/>
+  paddle.y is ${paddle.y} <br/> 
+  paddle.speed is ${paddle.speed} <br/>
+  */
+    ""
+  }
   bounces is ${bounces} <br/>
   `;
+  // console.debug(
   // );
   if (!isPaused) {
     requestAnimationFrame(animate);
