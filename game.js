@@ -1,21 +1,24 @@
 "use strict";
 // declare the vars readout
 const readout = document.getElementById("var-readout");
+///////////////// SETUP THE CANVAS
 // declare the canvas and the context
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-//add an array with the color constants we want
-const colorArr = ["#ee0000", "#00ee00", "#0000ee", "#0055dd"];
-
 // simulate a 16:9 ratio for the canvas
 canvas.width = 500;
 canvas.height = 280;
-
-// declare the variables for our html elements
+//add an array with the color constants we want
+const colorArr = ["#ee0000", "#00ee00", "#0000ee", "#0055dd"];
+////////// declare the variables for our html elements
+const speedSlider = document.getElementById("speed-slider");
 const pauseButton = document.getElementById("pause-button");
+///////////// declare our game variables
 let isPaused = false;
 let bounces = 0;
-const speedSlider = document.getElementById("speed-slider");
+let rightPressed = false;
+let leftPressed = false;
+///// declare the event listeners
 speedSlider.addEventListener("input", function () {
   ball.speed = parseInt(speedSlider.value);
   ball.dx = ball.speed;
@@ -33,7 +36,10 @@ pauseButton.addEventListener("click", function () {
     console.log("game is paused");
   }
 });
-// declare the ball object
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+////////// declare the visual objects
+// declare the ball
 const ball = {
   x: 50,
   y: 50,
@@ -50,6 +56,7 @@ const paddle = {
   height: 10,
   speed: 7,
 };
+/////////////Declare the functions
 // write a function to draw the ball
 function drawBall() {
   ctx.beginPath();
@@ -102,12 +109,23 @@ function updateBall() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 }
-// logic for the paddle move
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
 
-let rightPressed = false;
-let leftPressed = false;
+function detectCollision() {
+  if (
+    ball.y + ball.size >= paddle.y &&
+    ball.x >= paddle.x &&
+    ball.x <= paddle.x + paddle.width
+  ) {
+    ball.dy = -ball.dy; // Reverse the dy direction
+    bounces += 1;
+  }
+}
+function updatePosition() {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+}
+
+///////////// LOGIC for the paddle move
 
 function keyDownHandler(e) {
   if (e.key === "Right" || e.key === "ArrowRight") {
@@ -131,21 +149,6 @@ function movePaddle() {
   } else if (leftPressed && paddle.x > 0) {
     paddle.x -= paddle.speed;
   }
-}
-
-function detectCollision() {
-  if (
-    ball.y + ball.size >= paddle.y &&
-    ball.x >= paddle.x &&
-    ball.x <= paddle.x + paddle.width
-  ) {
-    ball.dy = -ball.dy; // Reverse the dy direction
-    // bounces += 1;
-  }
-}
-function updatePosition() {
-  ball.x += ball.dx;
-  ball.y += ball.dy;
 }
 
 // the animation function continually clears the screen and redraws everything based on new values
@@ -174,12 +177,12 @@ function animate() {
   paddle.x is ${paddle.x} <br/>
   paddle.y is ${paddle.y} <br/>
   paddle.speed is ${paddle.speed} <br/>
+  bounces is ${bounces} <br/>
   `;
   // );
   if (!isPaused) {
     requestAnimationFrame(animate);
   }
 }
-
 // the initial animation call
 animate();
