@@ -11,15 +11,22 @@
     <script src="game.js" defer></script>
   </head>
   <body>
-    <canvas id="canvas"></canvas><br />
-    <!-- Add the pause button -->
-    <button id="pause-button">Pause</button><br />
-    <!-- add a label and span tags to slider -->
-    <label>Speed Slider</label>
-    <span>0</span>
-    <!-- Add the range slider with a min of 5 and max of 10 and a default value of 5-->
-    <input type="range" id="speed-slider" min="0" max="10" value="5" />
-    <!-- add the end speed span -->
-    <span>10</span>
+    <div id="container-div" style="max-width: 800px">
+      <div id="var-display" style="float: right">
+        <p id="var-readout">Var Readout: <br /></p>
+      </div>
+      <div style="float: left">
+        <canvas id="canvas" style="float: right"></canvas><br />
+        <!-- Add the pause button -->
+        <button id="pause-button">Pause</button><br />
+        <!-- add a label and span tags to slider -->
+        <label>Speed Slider</label>
+        <span>0</span>
+        <!-- Add the range slider with a min of 5 and max of 10 and a default value of 5-->
+        <input type="range" id="speed-slider" min="0" max="10" value="5" />
+        <!-- add the end speed span -->
+        <span>10</span>
+      </div>
+    </div>
   </body>
 </html>
